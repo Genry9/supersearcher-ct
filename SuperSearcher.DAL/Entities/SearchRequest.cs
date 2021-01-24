@@ -6,7 +6,7 @@ namespace SuperSearcher.DAL.Entities
 {
 	public class SearchRequest
 	{
-		
+		public int Id { get; set; }
 		public string Term { get; set; }
 		public DateTime At { get; set; }
 
@@ -19,7 +19,8 @@ namespace SuperSearcher.DAL.Entities
 
 		public SearchRequest(string fromFolder, string searchTerm):this()
 		{
-
+			this.fromFolder = fromFolder;
+			this.Term = searchTerm;
 		}
 	}
 }

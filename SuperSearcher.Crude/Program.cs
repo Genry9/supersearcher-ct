@@ -182,10 +182,13 @@ namespace SuperSearcher.Crude
 				return;
 			}
 			else
+			{
+
 				foreach (var item in GetDirectories(from))
 				{
 					Search(item, _for);
 				}
+			}
 		}
 
 		static IEnumerable<string> GetFiles(string from, string with)

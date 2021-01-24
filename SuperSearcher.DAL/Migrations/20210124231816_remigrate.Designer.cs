@@ -9,8 +9,8 @@ using SuperSearcher.DAL.Contexts;
 namespace SuperSearcher.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210124212911_search_history")]
-    partial class search_history
+    [Migration("20210124231816_remigrate")]
+    partial class remigrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,10 @@ namespace SuperSearcher.DAL.Migrations
 
             modelBuilder.Entity("SuperSearcher.DAL.Entities.SearchRequest", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("At")
                         .HasColumnType("TEXT");
 
@@ -28,6 +32,8 @@ namespace SuperSearcher.DAL.Migrations
 
                     b.Property<string>("fromFolder")
                         .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("allRequests");
                 });

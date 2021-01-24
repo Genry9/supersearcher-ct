@@ -26,7 +26,7 @@ namespace SuperSearcher.DAL.Contexts
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<SearchRequest>().HasNoKey();
+			modelBuilder.Entity<SearchRequest>().HasKey(x=>x.Id);
 		}
 	}
 }

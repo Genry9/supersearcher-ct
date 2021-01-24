@@ -18,6 +18,10 @@ namespace SuperSearcher.DAL.Migrations
 
             modelBuilder.Entity("SuperSearcher.DAL.Entities.SearchRequest", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("At")
                         .HasColumnType("TEXT");
 
@@ -26,6 +30,8 @@ namespace SuperSearcher.DAL.Migrations
 
                     b.Property<string>("fromFolder")
                         .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("allRequests");
                 });

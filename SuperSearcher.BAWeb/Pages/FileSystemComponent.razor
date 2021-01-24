@@ -2,35 +2,50 @@
 @page "/FileSystemComponent/{path}"
 @using Microsoft.IdentityModel.Tokens;
 @inherits VM.FileSystemVM
-<h3>FileSystemComponent</h3>
+
+<h3>Folders</h3>
+<div class="container-fluid">
+	<div class="row">
+
+		@foreach (var item in folders)
+		{
 
 
+			var realPath = item;
+			if (realPath.Length > 3)
+			{
+				realPath += "/";
+			}
+			<div class="card col-3" style="width: 18rem;">
 
-@foreach (var item in folders)
-{
 
-
-	var realPath = item;
-	if (realPath.Length > 3)
-	{
-		realPath += "/";
-	}
-
-	<span>Drive</span>
-	<div class="alert">
-		@{
-			var displayName = (string.IsNullOrEmpty(System.IO.Path.GetDirectoryName(realPath))) ? realPath : System.IO.Path.GetDirectoryName(realPath);
+				<div class="card-body">
+					@{
+						var displayName = (string.IsNullOrEmpty(System.IO.Path.GetDirectoryName(realPath))) ? realPath : System.IO.Path.GetDirectoryName(realPath);
+					}
+					<h5 class="card-title">@displayName</h5>
+					<a href="/FileSystemComponent/@Base64UrlEncoder.Encode(item)" class="btn btn-primary"><i class="far fa-eye"></i></a>
+				</div>
+			</div>
 		}
-		<a href="/FileSystemComponent/@Base64UrlEncoder.Encode(item)">@displayName</a>
 	</div>
-}
+</div>
+<h3>Files</h3>
+<div class="container-fluid">
+	<div class="row">
 
-
-@foreach (var item in files)
-{
-	<a href="/FileSystemComponent/@Base64UrlEncoder.Encode(item)">@(System.IO.Path.GetFileName(item))</a>
-}
-
+		@foreach (var item in files)
+		{
+			<div class="card col-3" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">@(System.IO.Path.GetFileName(item))</h5>
+					<a href="/ViewFile/@Base64UrlEncoder.Encode(item)" class="btn btn-primary"><i class="far fa-eye"></i></a>
+					<a href="item" class="btn btn-secondary"><i class="fas fa-download"></i></a>
+				</div>
+			</div>
+		}
+	</div>
+</div>
 @code {
 
 }
