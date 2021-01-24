@@ -11,8 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using SuperSearcher.BAWeb.Areas.Identity;
-using SuperSearcher.BAWeb.Data;
-
+using SuperSearcher.BLL.Services;
+using SuperSearcher.DAL.Contexts;
+using SuperSearcher.DAL.Entities;
+using SuperSearcher.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,15 +35,27 @@ namespace SuperSearcher.BAWeb
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<ApplicationDbContext>(options =>
+
+
+#if DOCKER
+			services.AddDbContext<ApplicationContext>(options =>
 				options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnection")));
+#else
+			services.AddDbContext<ApplicationContext>(options =>
+				options.UseSqlite(
+					Configuration.GetConnectionString("LiteDB")));
+			
+#endif
+
 			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-				.AddEntityFrameworkStores<ApplicationDbContext>();
+				.AddEntityFrameworkStores<ApplicationContext>();
+
 			services.AddRazorPages();
 			services.AddServerSideBlazor();
-			services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-			services.AddSingleton<WeatherForecastService>();
+			services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
+			services.ConfigureBLL();
+			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

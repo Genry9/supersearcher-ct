@@ -55,6 +55,7 @@ namespace SuperSearcher.Crude
 		/// 
 		/// </summary>
 		/// <returns></returns>
+		/// <exception cref="ArgumentException">Thrown when wrong start path</exception>
 		static KeyValuePair<string, string> GetSearchConditions()
 		{
 			Console.WriteLine("Type start Path");

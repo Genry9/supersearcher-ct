@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  supersearcher.baweb:
+    image: ${DOCKER_REGISTRY-}supersearcherbaweb
+    build:
+      context: .
+      dockerfile: Dockerfile
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+        SA_PASSWORD: "Your_password123"
+        ACCEPT_EULA: "Y"

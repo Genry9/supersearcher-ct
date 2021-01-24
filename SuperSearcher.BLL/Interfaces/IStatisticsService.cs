@@ -6,5 +6,7 @@ namespace SuperSearcher.BLL.Interfaces
 {
 	interface IStatisticsService
 	{
+
+
 	}
 }

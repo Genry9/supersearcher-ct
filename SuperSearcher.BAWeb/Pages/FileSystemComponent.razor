@@ -1,0 +1,36 @@
+﻿@page "/FileSystemComponent"
+@page "/FileSystemComponent/{path}"
+@using Microsoft.IdentityModel.Tokens;
+@inherits VM.FileSystemVM
+<h3>FileSystemComponent</h3>
+
+
+
+@foreach (var item in folders)
+{
+
+
+	var realPath = item;
+	if (realPath.Length > 3)
+	{
+		realPath += "/";
+	}
+
+	<span>Drive</span>
+	<div class="alert">
+		@{
+			var displayName = (string.IsNullOrEmpty(System.IO.Path.GetDirectoryName(realPath))) ? realPath : System.IO.Path.GetDirectoryName(realPath);
+		}
+		<a href="/FileSystemComponent/@Base64UrlEncoder.Encode(item)">@displayName</a>
+	</div>
+}
+
+
+@foreach (var item in files)
+{
+	<a href="/FileSystemComponent/@Base64UrlEncoder.Encode(item)">@(System.IO.Path.GetFileName(item))</a>
+}
+
+@code {
+
+}

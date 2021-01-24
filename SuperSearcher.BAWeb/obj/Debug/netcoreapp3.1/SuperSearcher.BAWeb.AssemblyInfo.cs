@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-SuperSearcher.BAWeb-06ACB2FF-874C-4ABB-8334-50A9C3151AC0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SuperSearcher.BAWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
