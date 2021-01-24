@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "skN1xzbx365A3JtYT+Rby9Anu8jDZbmaF04PK0ei1V1IqsKINVVd4UDdruIoTrooqPyvTUa6N+QoDEjQWrbCcA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Paul Lubchenko\\source\\repos\\SuperSearcher\\SuperSearcher.BLL\\SuperSearcher.BLL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Paul Lubchenko\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
