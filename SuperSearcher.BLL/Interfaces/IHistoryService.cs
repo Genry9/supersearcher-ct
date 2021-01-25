@@ -1,14 +1,15 @@
-﻿using System;
+﻿using SuperSearcher.DAL.Entities;
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SuperSearcher.BLL.Interfaces
 {
-	interface IHistoryService
+	public interface IHistoryService
 	{
+		IEnumerable<SearchRequest> GetHistory(int lastXRecords = 0);
 
-		IEnumerable<string> GetHistory(int lastXRecords);
-
-		void AddRecord(string record);
+		void AddRecord(SearchRequest record);
 	}
 }

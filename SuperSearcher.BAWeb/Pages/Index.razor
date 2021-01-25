@@ -1,53 +1,36 @@
 ﻿@page "/"
+@using SuperSearcher.BAWeb.Components;
 @inherits VM.SearchVM
 <h1>Super Searcher</h1>
 
-		@if (!busy)
-		{
 <div class="container-fluid">
 	<div class="col-10">
 
-		<form @onsubmit="() => Search()" >
-			<select @bind="d">
-				@foreach (var item in drives)
-				{
-					<option value="@item">@item</option>
-				}
-			</select>
+		<form @onsubmit="() => Search()">
+
 			<input type="search" @bind="q" />
 		</form>
 	</div>
 </div>
-		}
-		else
-		{
-			<h5>searching...</h5>
-		}
 
 
-@if (searchResults == null)
+@if (searchResults == null && !busy)
 {
-	<h3>Here must be search statistics</h3>
+	<StatisticComponent statistics="StatisticsPreloaded" />
 }
 else
 {
-	if (searchResults.Count == 0)
-	{
-		<h3>Nothing found</h3>
+	<SearchResultComponent searchResults="searchResults" busy="this.busy" />
 
-	}
-	foreach (var item in searchResults)
-	{
-		<div class="col-10">
-			<h5>@item</h5>
-		</div>
-	}
 }
 
 
-@if (!string.IsNullOrWhiteSpace(Error))
-{
-	<h5 class="alert-danger">
-		@Error
-	</h5>
-}
+
+
+
+	@if (!string.IsNullOrWhiteSpace(Error))
+	{
+		<h5 class="alert-danger">
+			@Error
+		</h5>
+	}

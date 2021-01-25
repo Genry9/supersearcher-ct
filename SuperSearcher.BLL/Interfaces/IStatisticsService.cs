@@ -1,12 +1,16 @@
-﻿using System;
+﻿using SuperSearcher.BLL.Models.Statistics;
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SuperSearcher.BLL.Interfaces
 {
-	interface IStatisticsService
+	public interface IStatisticsService
 	{
-
+		SearchConditionStatisticResult GetStatistics();
+		SearchConditionStatisticResult GetStatistics(DateTime from);
+		SearchConditionStatisticResult GetStatistics(DateTime from, DateTime to);
 
 	}
 }

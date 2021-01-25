@@ -40,7 +40,7 @@
 				<div class="card-body">
 					<h5 class="card-title">@(System.IO.Path.GetFileName(item))</h5>
 					<a href="/ViewFile/@Base64UrlEncoder.Encode(item)" class="btn btn-primary"><i class="far fa-eye"></i></a>
-					<a href="item" class="btn btn-secondary"><i class="fas fa-download"></i></a>
+					<a href="@item" class="btn btn-secondary"><i class="fas fa-download"></i></a>
 				</div>
 			</div>
 		}

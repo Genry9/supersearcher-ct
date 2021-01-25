@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperSearcher.Crude", "..\S
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{530ABB79-6833-41CC-9B24-A32F58B74B78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperSearcher.DAL", "..\SuperSearcher.DAL\SuperSearcher.DAL.csproj", "{E9D366BB-B430-4D65-981C-F45B0BF63E11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperSearcher.DAL", "..\SuperSearcher.DAL\SuperSearcher.DAL.csproj", "{E9D366BB-B430-4D65-981C-F45B0BF63E11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

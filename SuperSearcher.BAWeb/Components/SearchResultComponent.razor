@@ -1,0 +1,52 @@
+﻿
+@using SuperSearcher.BAWeb.Models;
+
+
+@if (!busy)
+{
+
+
+	@if (searchResults.Count == 0)
+	{
+		<h3>Nothing found</h3>
+
+	}
+	@foreach (var item in searchResults)
+	{
+		<div class="col-10">
+			<h5>@item.Title</h5>
+			<p>@item.Description</p>
+			<a href="@item.Link" class="btn btn-secondary">
+				@if (item.isLocal)
+				{
+					<i class="fas fa-hdd"></i>
+				}
+				else
+				{
+					<i class="fas fa-globe-europe"></i>
+				}
+			</a>
+		</div>
+	}
+
+}
+else
+{
+	<h5>searching...</h5>
+}
+
+@code{
+	[Parameter]
+	public List<SearchResult> searchResults { get; set; }
+
+	[Parameter]
+	public bool busy { get; set; } = true;
+
+	protected override void OnParametersSet()
+	{
+		base.OnParametersSet();
+		ShouldRender();
+	}
+
+
+}
