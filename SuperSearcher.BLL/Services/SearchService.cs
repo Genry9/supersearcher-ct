@@ -13,11 +13,7 @@ namespace SuperSearcher.BLL.Services
 
 		private readonly int _limit = 10;
 		private readonly List<DriveSearchResult> _found = new List<DriveSearchResult>();
-		public SearchService()
-		{
 
-
-		}
 		public IEnumerable<string> GetDirectories(string inFolder)
 		{
 			return Directory.GetDirectories(inFolder);
@@ -50,13 +46,8 @@ namespace SuperSearcher.BLL.Services
 
 			foreach (string item in drives)
 			{
-
 				RecursiveSearch(item, searchTerm);
-
 			}
-
-
-
 			return _found;
 		}
 
@@ -75,24 +66,23 @@ namespace SuperSearcher.BLL.Services
 				}));
 
 
-			if (_found.Count < _limit)
-			{
-				foreach (string item in GetDirectories(inFolder))
-				{
-					try
-					{
-						RecursiveSearch(item, searchTerm);
-					}
-					catch (UnauthorizedAccessException ex)
-					{
-						return;
-					}
-				}
-			}
-			else
+			if (_found.Count >= _limit)
 			{
 				return;
 			}
+
+			foreach (string item in GetDirectories(inFolder))
+			{
+				try
+				{
+					RecursiveSearch(item, searchTerm);
+				}
+				catch (UnauthorizedAccessException ex)
+				{
+					return;
+				}
+			}
+
 		}
 
 	}
