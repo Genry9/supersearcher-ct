@@ -18,13 +18,15 @@ namespace SuperSearcher.BLL.Models.Statistics
 		{
 			_logs = logs;
 			_result = new SearchConditionStatisticResult();
-			_terms = _logs.Select(x => x.Term).ToArray();
+			_terms = _logs.Select(x => x.Term)?.ToArray();
 		}
 
 
 
 		public StatisticsBuilder AddTotalLetters()
 		{
+			if (_logs.Count() == 0) return this;
+
 			string totalSTR = string.Join(string.Empty, _terms);
 
 			var totals = totalSTR.CalculateSplit();
@@ -42,7 +44,7 @@ namespace SuperSearcher.BLL.Models.Statistics
 
 		public StatisticsBuilder AddLenthCalculations()
 		{
-
+			if (_logs.Count() == 0) return this;
 			var longest = _terms.Aggregate(string.Empty, (seed, f) => f?.Length > seed.Length ? f : seed);
 			var shortest = _terms.Aggregate(string.Empty, (seed, f) => f?.Length < seed.Length ? f : seed);
 
@@ -56,6 +58,7 @@ namespace SuperSearcher.BLL.Models.Statistics
 
 		public StatisticsBuilder FindFirstTrendRequest()
 		{
+			if (_logs.Count() == 0) return this;
 			_result.TrendRequest = _terms.GroupBy(v => v)
 				.OrderByDescending(g => g.Count())
 				.First()
@@ -66,6 +69,7 @@ namespace SuperSearcher.BLL.Models.Statistics
 
 		public StatisticsBuilder FindMostUsedChar()
 		{
+			if (_logs.Count() == 0) return this;
 			_result.MostUsed = string.Join(string.Empty, _terms).ToCharArray().GroupBy(v => v)
 				.OrderByDescending(g => g.Count())
 				.First()
@@ -77,6 +81,7 @@ namespace SuperSearcher.BLL.Models.Statistics
 
 		public StatisticsBuilder AddAvgByDay()
 		{
+			if (_logs.Count() == 0) return this;
 			var groupedByDate = _logs.GroupBy(x => x.At.Date);
 			_result.ReqPerDayAvg = (decimal)groupedByDate.Average(x => x.Count());
 
