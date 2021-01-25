@@ -18,7 +18,7 @@ namespace SuperSearcher.BLL.Services
 
 		public void AddRecord(SearchRequest record)
 		{
-			
+			_repo.Create(record);
 		}
 
 		public IEnumerable<SearchRequest> GetHistory(int lastXRecords = 0)

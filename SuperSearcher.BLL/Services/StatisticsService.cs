@@ -22,9 +22,6 @@ namespace SuperSearcher.BLL.Services
 			return Build(_history.GetHistory());
 		}
 
-
-
-
 		public SearchConditionStatisticResult GetStatistics(DateTime from)
 		{
 			return Build(_history.GetHistory().Where(x => x.At >= from));

@@ -21,7 +21,7 @@ namespace SuperSearcher.BLL.Models.Statistics
 		/// <exception cref="ArgumentException">When no logs provided</exception>
 		public StatisticsBuilder(IEnumerable<SearchRequest> logs)
 		{
-			if (_logs.Count() == 0) 
+			if (logs.Count() == 0) 
 				throw new ArgumentException("No logs availeble");
 			_logs = logs;
 			_result = new SearchConditionStatisticResult();
@@ -52,7 +52,7 @@ namespace SuperSearcher.BLL.Models.Statistics
 		{
 			
 			var longest = _terms.Aggregate(string.Empty, (seed, f) => f?.Length > seed.Length ? f : seed);
-			var shortest = _terms.Aggregate(string.Empty, (seed, f) => f?.Length < seed.Length ? f : seed);
+			var shortest = _terms.Aggregate(_terms.First(), (seed, f) => f?.Length < seed.Length ? f : seed);
 
 
 			_result.termLenMax = longest.Length;
