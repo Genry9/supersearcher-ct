@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Identity;
 
 using SuperSearcher.BAWeb.Models;
 using SuperSearcher.BLL.Models.Statistics;
@@ -10,13 +11,16 @@ using System.Threading.Tasks;
 
 namespace SuperSearcher.BAWeb.VM
 {
-	public class SearchVM : ComponentBase
+	public class SearchVM : BaseDriveVM
 	{
 
 		const int _limit = 5;
 
 		[Inject]
-		protected SuperSearcher.BLL.Services.SearchService driveSearcher { get; set; }
+		SignInManager<SuperSearcher.DAL.Entities.User> SignInManager { get; set; }
+
+		[Inject]
+		UserManager<SuperSearcher.DAL.Entities.User> UserManager { get; set; }
 
 		[Inject]
 		protected SuperSearcher.BLL.Interfaces.IWebSearcher webSearcher { get; set; }
@@ -28,59 +32,79 @@ namespace SuperSearcher.BAWeb.VM
 
 		[Parameter]
 		public string q { get; set; }
-		[Parameter]
-		public string d { get; set; }
+
 		public List<SearchResult> searchResults { get; set; }
 
 		public SearchConditionStatisticResult StatisticsPreloaded { get; set; }
 
-		public string[] drives { get; set; }
 
-		public string Error { get; set; }
-
-		public bool busy { get; set; } = false;
 		protected override void OnInitialized()
 		{
-			drives = driveSearcher.GetDrives().ToArray();
-			StatisticsPreloaded = statisticsService.GetStatistics();
+
+			StatisticsPreloaded = statisticsService.GetStatistics(SignInManager.Context.User.Identity.Name);
 
 			base.OnInitialized();
 		}
 
 		public async Task Search()
 		{
-			SetBusy(true);
-			searchResults = new List<SearchResult>();
-			if (!string.IsNullOrWhiteSpace(q))
+			if (string.IsNullOrWhiteSpace(q) || busy)
 			{
-				historyService.AddRecord(new DAL.Entities.SearchRequest("All drives", q));
-				try
-				{
-					searchResults.AddRange(
-						driveSearcher.GetResults(q)
-						.Select(
-							x => new SearchResult()
-							{
-								Title = x.title,
-								Description = x.description,
-								Link = x.link,
-								isLocal = true
-							}).Take(_limit));
+				return;
+			}
 
-					searchResults.AddRange(webSearcher.GetResults(q)
-						.Select(x => new SearchResult()
+			SetBusy(true);
+
+			searchResults = new List<SearchResult>();
+			historyService.AddRecord(new DAL.Entities.SearchRequest("All drives", q)
+			{
+				UserId = SignInManager.Context.User.Identity.Name
+			});
+			LoadFilesResults(q);
+			LoadWebResults(q);
+
+			SetBusy(false);
+		}
+
+
+		public void LoadFilesResults(string query)
+		{
+			try
+			{
+				searchResults.AddRange(
+					driveSearcher.GetResults(query)
+					.Select(
+						x => new SearchResult()
 						{
 							Title = x.title,
 							Description = x.description,
-							Link = x.link
+							Link = x.link,
+							isLocal = true
 						}).Take(_limit));
-				}
-				catch (Exception ex)
-				{
-					Error = ex.Message;
-				}
 			}
-			SetBusy(false);
+			catch (Exception ex)
+			{
+				Error = ex.Message;
+			}
+
+		}
+
+		public void LoadWebResults(string query)
+		{
+			try
+			{
+				searchResults.AddRange(webSearcher.GetResults(query)
+					.Select(x => new SearchResult()
+					{
+						Title = x.title,
+						Description = x.description,
+						Link = x.link
+					}).Take(_limit));
+			}
+			catch (Exception ex)
+			{
+				Error = ex.Message;
+			}
 		}
 
 		public void SetBusy(bool val)

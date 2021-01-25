@@ -8,7 +8,7 @@ namespace SuperSearcher.BLL.Interfaces
 {
 	public interface IHistoryService
 	{
-		IEnumerable<SearchRequest> GetHistory(int lastXRecords = 0);
+		IEnumerable<SearchRequest> GetHistory(string userName = "",int lastXRecords = 0);
 
 		void AddRecord(SearchRequest record);
 	}

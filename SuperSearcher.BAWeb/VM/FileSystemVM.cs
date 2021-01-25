@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SuperSearcher.BAWeb.VM
 {
-	public class FileSystemVM : ComponentBase
+	public class FileSystemVM : BaseDriveVM
 	{
         [Inject]
         protected SuperSearcher.BLL.Services.SearchService searcher { get; set; }

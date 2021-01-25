@@ -21,12 +21,14 @@ namespace SuperSearcher.BLL.Services
 			_repo.Create(record);
 		}
 
-		public IEnumerable<SearchRequest> GetHistory(int lastXRecords = 0)
+		public IEnumerable<SearchRequest> GetHistory(string userName = "", int lastXRecords = 0)
 		{
+			var result = _repo.Get().Where(x =>x.UserId != null && x.UserId.Contains(userName));
+
 			if (lastXRecords > 0)
-				return _repo.Get().OrderByDescending(x=>x.At).Take(lastXRecords);
-			else
-				return _repo.Get();
+				result = result.OrderByDescending(x => x.At).Take(lastXRecords);
+
+			return result;
 		}
 	}
 }

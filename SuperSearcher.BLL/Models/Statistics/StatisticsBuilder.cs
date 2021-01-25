@@ -4,7 +4,6 @@ using SuperSearcher.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SuperSearcher.BLL.Models.Statistics
 {
@@ -21,7 +20,7 @@ namespace SuperSearcher.BLL.Models.Statistics
 		/// <exception cref="ArgumentException">When no logs provided</exception>
 		public StatisticsBuilder(IEnumerable<SearchRequest> logs)
 		{
-			if (logs.Count() == 0) 
+			if (logs.Count() == 0)
 				throw new ArgumentException("No logs availeble");
 			_logs = logs;
 			_result = new SearchConditionStatisticResult();
@@ -32,7 +31,7 @@ namespace SuperSearcher.BLL.Models.Statistics
 
 		public StatisticsBuilder AddTotalLetters()
 		{
-			
+
 			string totalSTR = string.Join(string.Empty, _terms);
 
 			var totals = totalSTR.CalculateSplit();
@@ -50,11 +49,9 @@ namespace SuperSearcher.BLL.Models.Statistics
 
 		public StatisticsBuilder AddLenthCalculations()
 		{
-			
+
 			var longest = _terms.Aggregate(string.Empty, (seed, f) => f?.Length > seed.Length ? f : seed);
 			var shortest = _terms.Aggregate(_terms.First(), (seed, f) => f?.Length < seed.Length ? f : seed);
-
-
 			_result.termLenMax = longest.Length;
 			_result.termLenMin = shortest.Length;
 			_result.termLenAvg = (decimal)_terms.Average(x => x?.Length);
@@ -64,35 +61,28 @@ namespace SuperSearcher.BLL.Models.Statistics
 
 		public StatisticsBuilder FindFirstTrendRequest()
 		{
-			
 			_result.TrendRequest = _terms.GroupBy(v => v)
 				.OrderByDescending(g => g.Count())
 				.First()
 				.Key;
-
 			return this;
 		}
 
 		public StatisticsBuilder FindMostUsedChar()
 		{
-			
 			_result.MostUsed = string.Join(string.Empty, _terms).ToCharArray().GroupBy(v => v)
 				.OrderByDescending(g => g.Count())
 				.First()
 				.Key;
-
 			return this;
 		}
 
 
 		public StatisticsBuilder AddAvgByDay()
 		{
-			
 			var groupedByDate = _logs.GroupBy(x => x.At.Date);
 			_result.ReqPerDayAvg = (decimal)groupedByDate.Average(x => x.Count());
-
 			return this;
-
 		}
 
 		public SearchConditionStatisticResult Build()

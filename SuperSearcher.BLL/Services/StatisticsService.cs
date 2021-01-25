@@ -17,19 +17,19 @@ namespace SuperSearcher.BLL.Services
 			this._history = history;
 		}
 
-		public SearchConditionStatisticResult GetStatistics()
+		public SearchConditionStatisticResult GetStatistics(string userName = "")
 		{
-			return Build(_history.GetHistory());
+			return Build(_history.GetHistory(userName));
 		}
 
-		public SearchConditionStatisticResult GetStatistics(DateTime from)
+		public SearchConditionStatisticResult GetStatistics(string userName, DateTime from)
 		{
-			return Build(_history.GetHistory().Where(x => x.At >= from));
+			return Build(_history.GetHistory(userName).Where(x => x.At >= from));
 		}
 
-		public SearchConditionStatisticResult GetStatistics(DateTime from, DateTime to)
+		public SearchConditionStatisticResult GetStatistics(string userName, DateTime from, DateTime to)
 		{
-			return Build(_history.GetHistory().Where(x => x.At >= from && x.At <= to));
+			return Build(_history.GetHistory(userName).Where(x => x.At >= from && x.At <= to));
 		}
 
 

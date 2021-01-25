@@ -10,6 +10,7 @@ namespace SuperSearcher.DAL.Entities
 		public string Term { get; set; }
 		public DateTime At { get; set; }
 
+		public string UserId { get; set; }
 		public string fromFolder { get; set; }
 
 		public SearchRequest()

@@ -8,9 +8,9 @@ namespace SuperSearcher.BLL.Interfaces
 {
 	public interface IStatisticsService
 	{
-		SearchConditionStatisticResult GetStatistics();
-		SearchConditionStatisticResult GetStatistics(DateTime from);
-		SearchConditionStatisticResult GetStatistics(DateTime from, DateTime to);
+		SearchConditionStatisticResult GetStatistics(string userName);
+		SearchConditionStatisticResult GetStatistics(string userName, DateTime from);
+		SearchConditionStatisticResult GetStatistics(string userName, DateTime from, DateTime to);
 
 	}
 }
