@@ -45,11 +45,15 @@ namespace SuperSearcher.BAWeb
 			services.AddDbContext<ApplicationContext>(options =>
 				options.UseSqlite(
 					Configuration.GetConnectionString("LiteDB")));
-			
+
+			services.AddDbContext<ClientContext>(options =>
+				options.UseSqlite(
+					Configuration.GetConnectionString("LiteDB")));
+
 #endif
 
-			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-				.AddEntityFrameworkStores<ApplicationContext>();
+			services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+				.AddEntityFrameworkStores<ClientContext>();
 
 			services.AddRazorPages();
 			services.AddServerSideBlazor();
