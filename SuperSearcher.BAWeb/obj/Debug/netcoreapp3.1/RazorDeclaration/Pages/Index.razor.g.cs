@@ -75,8 +75,15 @@ using SuperSearcher.BAWeb.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "c:\Users\Paul Lubchenko\source\repos\SuperSearcher\SuperSearcher.BAWeb\Pages\Index.razor"
+using SuperSearcher.BAWeb.Components;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
-    public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
+    public partial class Index : VM.SearchVM
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)

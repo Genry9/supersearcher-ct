@@ -83,7 +83,7 @@ using SuperSearcher.BAWeb.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 28 "c:\Users\Paul Lubchenko\source\repos\SuperSearcher\SuperSearcher.BAWeb\Shared\NavMenu.razor"
+#line 24 "c:\Users\Paul Lubchenko\source\repos\SuperSearcher\SuperSearcher.BAWeb\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 

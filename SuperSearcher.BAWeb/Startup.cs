@@ -1,3 +1,5 @@
+#define MSSQL
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -37,10 +39,14 @@ namespace SuperSearcher.BAWeb
 		{
 
 
-#if DOCKER
+#if DOCKER || MSSQL
 			services.AddDbContext<ApplicationContext>(options =>
 				options.UseSqlServer(
-					Configuration.GetConnectionString("DefaultConnection")));
+					Configuration.GetConnectionString("Smarter")));
+
+			services.AddDbContext<ClientContext>(options =>
+				options.UseSqlServer(
+					Configuration.GetConnectionString("Smarter")));
 #else
 			services.AddDbContext<ApplicationContext>(options =>
 				options.UseSqlite(

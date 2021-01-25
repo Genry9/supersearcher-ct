@@ -6,3 +6,4 @@ bin/
 obj/
 .vs/
 /SuperSearcher.BAWeb/sqlitedemo.db
+RELEASE/
