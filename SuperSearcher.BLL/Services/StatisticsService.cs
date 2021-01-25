@@ -38,13 +38,21 @@ namespace SuperSearcher.BLL.Services
 
 		private SearchConditionStatisticResult Build(IEnumerable<SearchRequest> requests)
 		{
-			StatisticsBuilder b = new StatisticsBuilder(requests);
-			b.AddTotalLetters()
-				.AddLenthCalculations()
-				.AddAvgByDay()
-				.FindFirstTrendRequest()
-				.FindMostUsedChar();
-			return b.Build();
+			try
+			{
+
+				StatisticsBuilder b = new StatisticsBuilder(requests);
+				b.AddTotalLetters()
+					.AddLenthCalculations()
+					.AddAvgByDay()
+					.FindFirstTrendRequest()
+					.FindMostUsedChar();
+				return b.Build();
+			}
+			catch (ArgumentException)
+			{
+				return new SearchConditionStatisticResult();
+			}
 		}
 
 	}
