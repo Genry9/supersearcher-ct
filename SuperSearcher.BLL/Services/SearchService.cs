@@ -1,15 +1,10 @@
 ﻿using SuperSearcher.BLL.Interfaces;
-using SuperSearcher.DAL.Entities;
-using SuperSearcher.DAL.Interfaces;
+using SuperSearcher.BLL.Models.Search;
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using SuperSearcher.BLL.Models.Search;
 
 namespace SuperSearcher.BLL.Services
 {
@@ -51,9 +46,9 @@ namespace SuperSearcher.BLL.Services
 		{
 			_found.Clear();
 
-			var drives = GetDrives();
+			IEnumerable<string> drives = GetDrives();
 
-			foreach (var item in drives)
+			foreach (string item in drives)
 			{
 
 				RecursiveSearch(item, searchTerm);
@@ -82,7 +77,7 @@ namespace SuperSearcher.BLL.Services
 
 			if (_found.Count < _limit)
 			{
-				foreach (var item in GetDirectories(inFolder))
+				foreach (string item in GetDirectories(inFolder))
 				{
 					try
 					{

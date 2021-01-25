@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 using Microsoft.EntityFrameworkCore;
 
 using SuperSearcher.DAL.Entities;
@@ -10,7 +7,7 @@ namespace SuperSearcher.DAL.Contexts
 {
 	public class ApplicationContext: DbContext
 	{
-		DbSet<SearchRequest> allRequests { get; set; }
+		private DbSet<SearchRequest> allRequests { get; set; }
 
 
 		public ApplicationContext()

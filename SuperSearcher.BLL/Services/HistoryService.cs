@@ -2,7 +2,6 @@
 using SuperSearcher.DAL.Entities;
 using SuperSearcher.DAL.Interfaces;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,10 +9,10 @@ namespace SuperSearcher.BLL.Services
 {
 	public class HistoryService : IHistoryService
 	{
-		IGenericRepository<SearchRequest> _repo;
+		private readonly IGenericRepository<SearchRequest> _repo;
 		public HistoryService(IGenericRepository<SearchRequest> repo)
 		{
-			this._repo = repo;
+			_repo = repo;
 		}
 
 		public void AddRecord(SearchRequest record)
@@ -23,10 +22,12 @@ namespace SuperSearcher.BLL.Services
 
 		public IEnumerable<SearchRequest> GetHistory(string userName = "", int lastXRecords = 0)
 		{
-			var result = _repo.Get().Where(x =>x.UserId != null && x.UserId.Contains(userName));
+			IEnumerable<SearchRequest> result = _repo.Get().Where(x =>x.UserId != null && x.UserId.Contains(userName));
 
 			if (lastXRecords > 0)
+			{
 				result = result.OrderByDescending(x => x.At).Take(lastXRecords);
+			}
 
 			return result;
 		}

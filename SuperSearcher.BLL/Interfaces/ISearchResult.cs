@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SuperSearcher.BLL.Interfaces
+﻿namespace SuperSearcher.BLL.Interfaces
 {
-    public interface ISearchResult
+	public interface ISearchResult
     {
         string description { get; set; }
         string link { get; set; }

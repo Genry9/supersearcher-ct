@@ -1,6 +1,5 @@
 ﻿using SuperSearcher.BLL.Interfaces;
 using SuperSearcher.BLL.Models.Statistics;
-using SuperSearcher.BLL.Models.Statistics.Extensions;
 using SuperSearcher.DAL.Entities;
 
 using System;
@@ -14,7 +13,7 @@ namespace SuperSearcher.BLL.Services
 		private readonly IHistoryService _history;
 		public StatisticsService(IHistoryService history)
 		{
-			this._history = history;
+			_history = history;
 		}
 
 		public SearchConditionStatisticResult GetStatistics(string userName = "")

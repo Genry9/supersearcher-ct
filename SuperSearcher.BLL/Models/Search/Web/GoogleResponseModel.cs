@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace SuperSearcher.BLL.Models.Search.Web
 {
-	class GoogleResponseModel
+	internal class GoogleResponseModel
 	{
 		public List<WebSearchResult> results { get; set; }
 	}

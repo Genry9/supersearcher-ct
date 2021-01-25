@@ -21,16 +21,10 @@
 else
 {
 	<SearchResultComponent searchResults="searchResults" busy="this.busy" />
-
 }
-
-
-
-
-
-	@if (!string.IsNullOrWhiteSpace(Error))
-	{
-		<h5 class="alert-danger">
-			@Error
-		</h5>
-	}
+@if (!string.IsNullOrWhiteSpace(Error))
+{
+	<h5 class="alert-danger">
+		@Error
+	</h5>
+}

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SuperSearcher.DAL.Entities
 {
@@ -21,7 +19,7 @@ namespace SuperSearcher.DAL.Entities
 		public SearchRequest(string fromFolder, string searchTerm):this()
 		{
 			this.fromFolder = fromFolder;
-			this.Term = searchTerm;
+			Term = searchTerm;
 		}
 	}
 }

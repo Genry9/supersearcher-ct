@@ -4,12 +4,9 @@
 
 @if (!busy)
 {
-
-
 	@if (searchResults.Count == 0)
 	{
 		<h3>Nothing found</h3>
-
 	}
 	@foreach (var item in searchResults)
 	{
@@ -28,7 +25,6 @@
 			</a>
 		</div>
 	}
-
 }
 else
 {
@@ -47,6 +43,4 @@ else
 		base.OnParametersSet();
 		ShouldRender();
 	}
-
-
 }

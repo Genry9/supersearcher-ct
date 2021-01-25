@@ -1,9 +1,5 @@
 ﻿using SuperSearcher.BLL.Interfaces;
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace SuperSearcher.BLL.Models.Search
 {
 	public class WebSearchResult: ISearchResult

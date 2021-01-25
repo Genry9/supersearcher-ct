@@ -41,15 +41,15 @@ namespace SuperSearcher.DAL.Repositories
 
 		public TEntity Create(TEntity item)
 		{
-			this.dbSet.Add(item);
-			this.context.SaveChanges();
+			dbSet.Add(item);
+			context.SaveChanges();
 
 			return item;
 		}
 		public void CreateRange(IEnumerable<TEntity> items)
 		{
-			this.dbSet.AddRange(items);
-			this.context.SaveChanges();
+			dbSet.AddRange(items);
+			context.SaveChanges();
 		}
 
 		public void Update(TEntity item)
@@ -65,19 +65,19 @@ namespace SuperSearcher.DAL.Repositories
 		}
 		public void RemoveRange(IEnumerable<TEntity> items)
 		{
-			this.dbSet.RemoveRange(items);
-			this.context.SaveChanges();
+			dbSet.RemoveRange(items);
+			context.SaveChanges();
 		}
 
 		public void Remove(int id)
 		{
-			var entity = FindById(id);
+			TEntity entity = FindById(id);
 			dbSet.Remove(entity);
 			context.SaveChanges();
 		}
 		public void Remove(long id)
 		{
-			var entity = FindById(id);
+			TEntity entity = FindById(id);
 			dbSet.Remove(entity);
 			context.SaveChanges();
 		}
@@ -90,7 +90,7 @@ namespace SuperSearcher.DAL.Repositories
 		public IEnumerable<TEntity> GetWithInclude(Func<TEntity, bool> predicate,
 			params Expression<Func<TEntity, object>>[] includeProperties)
 		{
-			var query = Include(includeProperties);
+			IQueryable<TEntity> query = Include(includeProperties);
 			return query.Where(predicate).ToList();
 		}
 

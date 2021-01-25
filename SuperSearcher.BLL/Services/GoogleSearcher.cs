@@ -1,11 +1,9 @@
 ﻿using SuperSearcher.BLL.Interfaces;
-using SuperSearcher.BLL.Models.Search;
 using SuperSearcher.BLL.Models.Search.Web;
 
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SuperSearcher.BLL.Services
